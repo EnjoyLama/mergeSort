@@ -35,14 +35,14 @@ void merge(int *parray, int begin, int medium, int end){
 
     int index_origin = begin;
     for(int element = 0; element < size_array_first; element++){
-        *(cpy_first+element) = *(parray+element);
+        *(cpy_first+element) = *(parray+element+index_origin);
         //printf("cpy_first element : %d\n", cpy_first[element]);
     }
     puts("After Copy First\n");
     printArray(cpy_first, size_array_first);
     index_origin = medium+1;
     for(int element = 0; element < size_array_sec; element++){
-        *(cpy_first+element) = *(parray+1+element);
+        *(cpy_sec+element) = *(parray+element+index_origin);
 
     }
 
@@ -50,18 +50,27 @@ void merge(int *parray, int begin, int medium, int end){
     index_origin = begin;
     //printArray(cpy_first, sizeof(cpy_first)/sizeof(cpy_first[0]));
     //printArray(cpy_sec, sizeof(cpy_sec)/sizeof(cpy_sec[0]));
-
+/*
+    int index = 0;
+    while(cpy_first[index_first] < cpy_sec[index_sec])
+    {
+        *(parray+begin+index) = cpy_first[index_first];
+        index_first++;
+        index++;
+    }
+*/
     while(index_first < size_array_first && index_sec < size_array_sec){
         if(cpy_first[index_first] < cpy_sec[index_sec]){
-            int tmp = cpy_first[index_first];
-            *(parray+index_origin) = cpy_sec[index_sec];
-            *(parray+medium+index_sec) = tmp;
+            //*(parray+begin+index_first) = cpy_first[index_first];
+            //*(parray+medium+index_sec) = cpy_sec[index_sec];
             index_sec++;
+            index_first++;
         }
         else if(cpy_first[index_first] >= cpy_sec[index_sec]){
-            *(parray+index_origin) = cpy_first[index_first];
-            *(parray+medium+index_sec) = *(parray+medium+index_sec);
+            *(parray+begin+index_first) = cpy_sec[index_sec];
+            *(parray+medium+index_sec+1) = cpy_first[index_first];
             index_first++;
+            index_sec++;
         }
         index_origin++;
     }
