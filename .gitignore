@@ -1,0 +1,7 @@
+.vscode
+build
+*.o
+main
+a.out
+divide_*
+*.txt

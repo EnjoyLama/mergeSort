@@ -47,7 +47,7 @@ void merge(int *parray, int begin, int medium, int end){
     }
 
 
-    index_origin = begin;
+    index_origin = 0;
     //printArray(cpy_first, sizeof(cpy_first)/sizeof(cpy_first[0]));
     //printArray(cpy_sec, sizeof(cpy_sec)/sizeof(cpy_sec[0]));
 /*
@@ -61,27 +61,23 @@ void merge(int *parray, int begin, int medium, int end){
 */
     while(index_first < size_array_first && index_sec < size_array_sec){
         if(cpy_first[index_first] < cpy_sec[index_sec]){
-            //*(parray+begin+index_first) = cpy_first[index_first];
-            //*(parray+medium+index_sec) = cpy_sec[index_sec];
-            index_sec++;
+            *(parray+begin+index_origin) = cpy_first[index_first];
             index_first++;
         }
         else if(cpy_first[index_first] >= cpy_sec[index_sec]){
-            *(parray+begin+index_first) = cpy_sec[index_sec];
-            *(parray+medium+index_sec+1) = cpy_first[index_first];
-            index_first++;
+            *(parray+begin+index_origin) = cpy_sec[index_sec];
             index_sec++;
         }
         index_origin++;
     }
 
     while(index_first < size_array_first){
-        *(parray+index_origin) = cpy_first[index_first];
+        *(parray+begin+index_origin) = cpy_first[index_first];
         index_first++;
         index_origin++;
     }
     while(index_sec < size_array_sec){
-        *(parray+index_origin) = cpy_sec[index_sec];
+        *(parray+begin+index_origin) = cpy_sec[index_sec];
         index_sec++;
         index_origin++;
     }
